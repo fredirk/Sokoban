@@ -1,24 +1,46 @@
+body {
+    width:1024px;
+    margin:auto;
+    background-color:black;
+}
+table { 
+    border-spacing: 0; 
+}
+
 td {
+    padding: 0px;
     height: 40px;
     width: 40px;
 }
 
-.tile-goal {
-    background-color: green;
+.tile-space {
+    background-color:black;
 }
 
-.tile-space {
-    background-color: black;
+.tile-goal {
+    background-color: lightgrey;
+    border-style: inset;
 }
 
 .tile-wall {
-    background-color: gray;
+    background-color:darkgrey;
+    border-style:outset;
 }
 
 .entity-block {
-    background-color: brown;
+    height: 100%;
+    background-color:lightgrey;
+    border-style:outset;
 }
 
-.entity-player{
-    background-color: rebeccapurple;
+.entity-block-goal {
+    height: 100%;
+    background-color:yellowgreen;
+    border-style:outset;
+}
+
+.entity-player {
+    height: 100%;
+    background-color:orange;
+    border-style:outset;
 }
