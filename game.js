@@ -1,6 +1,6 @@
 let grid = new Grid(tileMap);
 let player = new Point(11, 11);
-let tileGoals = document.querySelectorAll('.tile-goal');
+let goalTiles = document.querySelectorAll('.tile-goal');
 
 let audioPlayer = {
     blockGoal: new Audio('audio/Metal_Click.wav'),
@@ -10,12 +10,10 @@ let audioPlayer = {
 
 let goalCounter = {
     count: 0,
-    countGoal: tileGoals.length,
+    countGoal: goalTiles.length,
 
     incrementCount() {
         this.count++;
-        console.log(this.count);
-
         if (this.count === this.countGoal){
             audioPlayer.winning.play();
             document.removeEventListener('keydown', moveHandler);
@@ -55,35 +53,37 @@ function handleRemovedNode(mutation) {
 
 let goalObserver = new MutationObserver(handleGoalCallback);
 let goalConfig = { childList: true };
-tileGoals.forEach((node) => goalObserver.observe(node, goalConfig));
+goalTiles.forEach((node) => goalObserver.observe(node, goalConfig));
 
 function isWall(point) {
     return grid.getGridCell(point).className === Tiles.Wall;
 }
 
-function move(position, direction) {
-    let oneTileFromPosition = direction(position);
-    let twoTileFromPosition = direction(oneTileFromPosition);
+function move(playerPosition, direction) {
+    let oneTileFromPlayer = direction(playerPosition);
+    let twoTileFromPlayer = direction(oneTileFromPlayer);
 
-    if (isWall(oneTileFromPosition)){
-        return position;
+    if (isWall(oneTileFromPlayer)){
+        return playerPosition;
     }
 
-    if (grid.hasElementAt(oneTileFromPosition)) {
-        if (!grid.hasElementAt(twoTileFromPosition) && !isWall(twoTileFromPosition)) {
-            let blockElement = grid.getElementAt(oneTileFromPosition);
-            grid.removeElementAt(oneTileFromPosition, blockElement);
-            grid.appendElementAt(twoTileFromPosition, blockElement);
+    if (grid.hasElementAt(oneTileFromPlayer)) {
+        if (grid.hasElementAt(twoTileFromPlayer) || isWall(twoTileFromPlayer)) {
+            return playerPosition;
         } else {
-            return position;
+            moveElement(oneTileFromPlayer, direction);
         }
     }
 
+    moveElement(playerPosition, direction);
+    audioPlayer.playerMove.play();
+    return oneTileFromPlayer;
+}
+
+function moveElement(position, direction) {
     let element = grid.getElementAt(position);
     grid.removeElementAt(position, element);
-    grid.appendElementAt(oneTileFromPosition, element);
-    audioPlayer.playerMove.play();
-    return oneTileFromPosition;
+    grid.appendElementAt(direction(position), element);
 }
 
 let direction = {

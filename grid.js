@@ -34,7 +34,7 @@ class Grid {
                     gridCell.className = Tiles.Space;
                     gridCell.appendChild(entityElement);
                 } else {
-                    gridCell.className = tileClass[tileMap.mapGrid[i][j]];
+                    gridCell.className = tile;
                 }
             }
         }
@@ -57,6 +57,6 @@ class Grid {
     }
 
     getGridCell(point) {
-        return this.gridTable.firstElementChild.childNodes[point.y].childNodes[point.x];
+        return this.gridTable.rows[point.y].cells[point.x];
     }
 }
