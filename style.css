@@ -3,11 +3,13 @@ body {
     margin:auto;
     background-color:black;
 }
+
 table { 
     border-spacing: 0; 
 }
 
 td {
+    position: relative;
     padding: 0px;
     height: 40px;
     width: 40px;
@@ -19,7 +21,7 @@ td {
 
 .tile-goal {
     background-color: lightgrey;
-    border-style: inset;
+    border-style:inset;
 }
 
 .tile-wall {
@@ -27,20 +29,25 @@ td {
     border-style:outset;
 }
 
+.entity {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
 .entity-block {
-    height: 100%;
     background-color:lightgrey;
     border-style:outset;
 }
 
 .entity-block-goal {
-    height: 100%;
     background-color:yellowgreen;
     border-style:outset;
 }
 
 .entity-player {
-    height: 100%;
     background-color:orange;
     border-style:outset;
 }
