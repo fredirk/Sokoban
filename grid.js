@@ -54,7 +54,7 @@ class Grid {
 
         const cell = element.parentElement;
         const row = cell.parentElement;
-        return new Point(row.rowIndex, cell.cellIndex);
+        return new Point(cell.cellIndex, row.rowIndex);
     }
 
     appendElementAt(point, element) {
