@@ -48,6 +48,15 @@ class Grid {
         return this.getGridCell(point).firstChild;
     }
 
+    getElementPoint(element) {
+        if (element.parentElement.nodeName !== 'TD')
+            return undefined;
+
+        const cell = element.parentElement;
+        const row = cell.parentElement;
+        return new Point(row.rowIndex, cell.cellIndex);
+    }
+
     appendElementAt(point, element) {
         this.getGridCell(point).appendChild(element);
     }

@@ -1,5 +1,5 @@
 let grid = new Grid(tileMap);
-let player = new Point(11, 11);
+let player = grid.getElementPoint(document.querySelector('.entity-player'));
 let goalTiles = document.querySelectorAll('.tile-goal');
 
 let audioPlayer = {
